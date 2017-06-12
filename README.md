@@ -30,4 +30,19 @@ available for subscription holders.
 * Install Visual Studio (2017)
     * Workloads to install:
         * Universal Windows Platform development
-        *  
+        * .NET desktop development
+        * Desktop development with C++
+        * Office/SharePoint development
+    * Extension & Updates (Tools Menu - Online - Search: install)
+       * Microsoft Visual Studio 2017 Installer Projects
+* Open src\AcaciaZPushPlugin\AcaciaZPushPlugin.sln with VS
+* Create Sigingig Certificate 
+    * Open Properties of Project 'AcaciaZPushPlugin'
+    * Goto Signing
+    * Create Test Certificate
+        * You can leave password empty
+* Set Platform (32 or 64 bit) in Setup Project
+* Build Solution for Release
+    * Set solution configuration to 'Release'
+    * Build Solution
+
