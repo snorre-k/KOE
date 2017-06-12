@@ -28,4 +28,6 @@ available for subscription holders.
 
 # Compile
 * Install Visual Studio (2017)
-  * 
+    * Workloads to install:
+        * Universal Windows Platform development
+        *  
