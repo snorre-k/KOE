@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcaciaZPushPlugin", "AcaciaZPushPlugin\AcaciaZPushPlugin.csproj", "{1A7427A5-F814-4B07-98B2-C67D758B65D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PluginDebugger", "PluginDebugger\PluginDebugger.csproj", "{9258AD17-0A25-4669-A95C-93EC70882551}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookRestarter", "OutlookRestarter\OutlookRestarter.csproj", "{222C4DA5-FA31-471A-B127-5E0C6AD2CB3C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{08243A00-071F-485A-A8E2-68B64ED1EC19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{222C4DA5-FA31-471A-B127-5E0C6AD2CB3C}.Release|x64.Build.0 = Release|Any CPU
 		{222C4DA5-FA31-471A-B127-5E0C6AD2CB3C}.Release|x86.ActiveCfg = Release|Any CPU
 		{222C4DA5-FA31-471A-B127-5E0C6AD2CB3C}.Release|x86.Build.0 = Release|Any CPU
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Debug|Any CPU.ActiveCfg = Debug
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Debug|Any CPU.Build.0 = Debug
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Debug|x64.ActiveCfg = Debug
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Debug|x64.Build.0 = Debug
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Debug|x86.ActiveCfg = Debug
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Debug|x86.Build.0 = Debug
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Release|Any CPU.ActiveCfg = Release
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Release|Any CPU.Build.0 = Release
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Release|x64.ActiveCfg = Release
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Release|x64.Build.0 = Release
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Release|x86.ActiveCfg = Release
+		{08243A00-071F-485A-A8E2-68B64ED1EC19}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
