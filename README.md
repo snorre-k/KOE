@@ -25,3 +25,7 @@ Community Support is available through the [Kopano Forum](
 https://forum.kopano.io/) and through the #Kopano channel on Freenode IRC 
 network. [Additional support options](https://kopano.com/support/) are 
 available for subscription holders.
+
+# Compile
+* Install Visual Studio (2017)
+  * 
