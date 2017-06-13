@@ -29,31 +29,31 @@ available for subscription holders.
 # Compile
 * Install Visual Studio (2017)
     * Workloads to install:
-        * Universal Windows Platform development
-        * .NET desktop development
-        * Desktop development with C++
-        * Office/SharePoint development
+        * `Universal Windows Platform development`
+        * `.NET desktop development`
+        * `Desktop development with C++`
+        * `Office/SharePoint development`
     * Extension & Updates (Tools - Extensions and Updates - Online - Search: install)
-       * Microsoft Visual Studio 2017 Installer Projects
-* Open src\AcaciaZPushPlugin\AcaciaZPushPlugin.sln with VS
+       * `Microsoft Visual Studio 2017 Installer Projects`
+* Open `src\AcaciaZPushPlugin\AcaciaZPushPlugin.sln` with VS
 * Create sigingig certificate 
-    * Open properties of project 'AcaciaZPushPlugin'
+    * Open properties of project `AcaciaZPushPlugin`
     * Goto Signing
     * Create Test Certificate
         * You can leave password empty
-* Set properties of 'Setup' project
-    * Select 'Setup' project
+* Set properties of `Setup` project
+    * Select `Setup` project
     * If not visible - show Properties Window - F4
-    * Set: Target Platform to x86 or x64 (32bit or 64bit Windows)
+    * Set: `Target Platform` to `x86` or `x64` (32bit or 64bit Office)
     * Optional change:
-        * Author
-        * Manufacturer (is used for installation path)
+        * `Author`
+        * `Manufacturer` (is used for installation path)
 * Builds solution
-    * Set solution configuration to 'Release'
+    * Set solution configuration to `Release`
     * Build Solution
 * Output files
-    * src\AcaciaZPushPlugin\Build\Setup
-        * setup.exe - installs prerequisites and KOE
-        * kopano_outlook.msi - installs KOE
-    * src\AcaciaZPushPlugin\Build\Release
+    * `src\AcaciaZPushPlugin\Build\Setup`
+        * `setup.exe` - installs prerequisites and KOE
+        * `kopano_outlook.msi` - installs KOE
+    * `src\AcaciaZPushPlugin\Build\Release`
         * contains build results from the different projects
