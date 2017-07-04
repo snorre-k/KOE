@@ -1,4 +1,6 @@
-﻿/// Copyright 2016 Kopano b.v.
+﻿
+using Acacia.Native;
+/// Copyright 2016 Kopano b.v.
 /// 
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU Affero General Public License, version 3,
@@ -13,7 +15,6 @@
 /// along with this program.If not, see<http://www.gnu.org/licenses/>.
 /// 
 /// Consult LICENSE file for details
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,7 +25,7 @@ using System.Windows.Forms;
 
 namespace Acacia.Controls
 {
-    internal static class KUIUtil
+    public static class KUIUtil
     {
         #region Geometry
 
@@ -124,6 +125,31 @@ namespace Acacia.Controls
             r.Width -= padding.Horizontal;
             r.Height -= padding.Vertical;
             return r;
+        }
+
+        public static Point TopLeft(this Rectangle _this)
+        {
+            return new Point(_this.Left, _this.Top);
+        }
+
+        public static Rectangle ToRectangle(this RectangleF _this)
+        {
+            return new Rectangle((int)_this.X, (int)_this.Y, (int)_this.Width, (int)_this.Height);
+        }
+
+        #endregion
+
+        #region Focus
+
+        public static Control GetFocusedControl()
+        {
+            Control focusedControl = null;
+            // To get hold of the focused control:
+            IntPtr focusedHandle = User32.GetFocus();
+            if (focusedHandle != IntPtr.Zero)
+                // Note that if the focused Control is not a .Net control, then this will return null.
+                focusedControl = Control.FromHandle(focusedHandle);
+            return focusedControl;
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿/// Copyright 2016 Kopano b.v.
+﻿/// Copyright 2017 Kopano b.v.
 /// 
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU Affero General Public License, version 3,
@@ -148,8 +148,21 @@ namespace Acacia.Features.SharedFolders
                     };
                     FocusNode(node);
                 }
+                SetInitialFocus(kTreeFolders);
             }
-            kTreeFolders.Focus();
+            else
+            {
+                SetInitialFocus(gabLookup);
+            }
+        }
+
+        private void SetInitialFocus(Control control)
+        {
+            // If busy, setting the focus doesn't work, as the control is enabled. Wait until done.
+            BusyHider.OnDoneBusy(() =>
+            {
+                control.Focus();
+            });
         }
 
         private void dialogButtons_Apply(object sender, EventArgs e)

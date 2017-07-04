@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-06-14 14:17+0000\n"
+"PO-Revision-Date: 2017-06-30 10:04+0000\n"
 "Last-Translator: Patrick Simpson <p.simpson@etosis.com>\n"
 "Language-Team: Dutch <http://translate.kopano.io/projects/kopano/kopano-ol-extension/nl/>\n"
 "Language: nl\n"
@@ -1210,4 +1210,16 @@ msgstr "Het is niet toegestaan om privé afspraken van andere gebruikers te wijz
 msgctxt "AcaciaZPushPlugin\\Properties\\Resources\\SharedFolders_PrivateEvent_Title"
 msgid "Private event"
 msgstr "Privé afspraak"
+
+#: AcaciaZPushPlugin\Features\SharedFolders\SharedFoldersDialog\gabLookup.NotFoundText
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\SharedFolders\\SharedFoldersDialog\\gabLookup.NotFoundText"
+msgid "The user was not found"
+msgstr "De gebruiker kon niet worden gevonden"
+
+#: AcaciaZPushPlugin\Features\SharedFolders\SharedFoldersDialog\gabLookup.Placeholder
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\SharedFolders\\SharedFoldersDialog\\gabLookup.Placeholder"
+msgid "Start typing name"
+msgstr "Type naam"
 
