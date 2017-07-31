@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-06-30 06:52+0000\n"
+"PO-Revision-Date: 2017-07-06 07:00+0000\n"
 "Last-Translator: Felix <f.bartels@kopano.com>\n"
 "Language-Team: German <http://translate.kopano.io/projects/kopano/kopano-ol-extension/de/>\n"
 "Language: de\n"
@@ -1222,4 +1222,148 @@ msgstr "Der Benutzer konnte nicht gefunden werden"
 msgctxt "AcaciaZPushPlugin\\Features\\SharedFolders\\SharedFoldersDialog\\gabLookup.Placeholder"
 msgid "Start typing name"
 msgstr "Tippe um die Suche zu starten"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnMethod.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnMethod.Text"
+msgid "Method"
+msgstr "Methode"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnFile.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnFile.Text"
+msgid "File"
+msgstr "Datei"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnLine.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnLine.Text"
+msgid "Line"
+msgstr "Linie"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\_tabProperties.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\_tabProperties.Text"
+msgid "General"
+msgstr "Generell"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\_tabWrapperTypes.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\_tabWrapperTypes.Text"
+msgid "Wrapper types"
+msgstr "Wrappertypen"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\_tabWrapperLocations.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\_tabWrapperLocations.Text"
+msgid "Wrapper locations"
+msgstr "Wrapperorte"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader1.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader1.Text"
+msgid "Type"
+msgstr "Typ"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader2.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader2.Text"
+msgid "Count"
+msgstr "Anzahl"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader3.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader3.Text"
+msgid "Type"
+msgstr "Typ"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader4.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader4.Text"
+msgid "Count"
+msgstr "Anzahl"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnEvent.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnEvent.Text"
+msgid "Event"
+msgstr "Ereignis"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnCount.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnCount.Text"
+msgid "Count"
+msgstr "Anzahl"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnId.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnId.Text"
+msgid "Id"
+msgstr "Id"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnEvents.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnEvents.Text"
+msgid "Events"
+msgstr "Ereignis"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\_tabItemEvents.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\_tabItemEvents.Text"
+msgid "Item events"
+msgstr "Elementereignis"
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnSubject.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnSubject.Text"
+msgid "Subject"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader5.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader5.Text"
+msgid "Id"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader6.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader6.Text"
+msgid "Type"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnHeader7.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnHeader7.Text"
+msgid "Subject"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\_tabWrappers.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\_tabWrappers.Text"
+msgid "Wrappers"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnProperties.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnProperties.Text"
+msgid "Properties"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\columnItemId.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\columnItemId.Text"
+msgid "ItemId"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\buttonCleanGC.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\buttonCleanGC.Text"
+msgid "Remove GC"
+msgstr ""
+
+#: AcaciaZPushPlugin\Features\DebugSupport\DebugDialog\buttonCopyFilter.Text
+#, csharp-format
+msgctxt "AcaciaZPushPlugin\\Features\\DebugSupport\\DebugDialog\\buttonCopyFilter.Text"
+msgid "Copy filter"
+msgstr ""
 

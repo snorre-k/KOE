@@ -1,4 +1,4 @@
-﻿/// Copyright 2016 Kopano b.v.
+﻿/// Copyright 2017 Kopano b.v.
 /// 
 /// This program is free software: you can redistribute it and/or modify
 /// it under the terms of the GNU Affero General Public License, version 3,
@@ -22,6 +22,8 @@ using System.Threading.Tasks;
 using Acacia.Stubs;
 using Acacia.Stubs.OutlookWrappers;
 using System.Reflection;
+using System.Threading;
+using System.Collections.Concurrent;
 
 namespace Acacia.Utils
 {
@@ -360,21 +362,87 @@ namespace Acacia.Utils
             }
         }
 
-        private class MailEventHooker : DisposableWrapper
+        public enum DebugEvent
         {
+            BeforeDelete,
+            Forward,
+            PropertyChange,
+            Read,
+            Reply,
+            ReplyAll,
+            Unload,
+            Write,
+
+            Dispose,
+            GC
+        }
+
+        public static IEnumerable<MailEventDebug> MailEventsDebug
+        {
+            get { return _hookers?.Values; }
+        }
+
+        public static void MailEventsDebugClean()
+        {
+            foreach (MailEventDebugImpl impl in _hookers.Values)
+            {
+                if (impl.GetEventCount(DebugEvent.GC) > 0)
+                {
+                    MailEventDebugImpl dummy;
+                    _hookers.TryRemove(impl._id, out dummy);
+                }
+            }
+        }
+
+        private static readonly ConcurrentDictionary<int, MailEventDebugImpl> _hookers = 
+            GlobalOptions.INSTANCE.WrapperTrace ? new ConcurrentDictionary<int, MailEventDebugImpl>() : null;
+
+        private class MailEventHooker : DisposableWrapper, IDebugDisposable
+        {
+            private readonly MailEventDebugImpl _debug;
             private IItem _item;
             private readonly MailEvents _events;
+
+            public string DebugContext
+            {
+                get
+                {
+                    return "Events for " + _item.DebugContext;
+                }
+            }
 
             public MailEventHooker(IItem item, MailEvents events)
             {
                 this._item = item;
                 this._events = events;
+
+                if (_hookers != null)
+                {
+                    _debug = new MailEventDebugImpl(TraceId, _item);
+                    _hookers.TryAdd(_debug._id, _debug);
+                }
+
                 HookEvents(true);
             }
 
             protected override void DoRelease()
             {
-                _item.Dispose();
+                if (_item != null)
+                {
+                    _item.Dispose();
+                    _item = null;
+                }
+
+                if (_debug != null)
+                {
+                    _debug.RecordEvent(DebugEvent.Dispose);
+                }
+            }
+
+            ~MailEventHooker()
+            {
+                _debug?.RecordEvent(DebugEvent.GC);
+                _debug?.Finished();
             }
 
             private void HookEvents(bool add)
@@ -383,11 +451,10 @@ namespace Acacia.Utils
                 {
                     if (add)
                     {
-
+                        events.Read += HandleRead;
                         events.BeforeDelete += HandleBeforeDelete;
                         events.Forward += HandleForward;
                         events.PropertyChange += HandlePropertyChange;
-                        events.Read += HandleRead;
                         events.Reply += HandleReply;
                         events.ReplyAll += HandleReplyAll;
                         events.Unload += HandleUnload;
@@ -395,10 +462,10 @@ namespace Acacia.Utils
                     }
                     else
                     {
+                        events.Read -= HandleRead;
                         events.BeforeDelete -= HandleBeforeDelete;
                         events.Forward -= HandleForward;
                         events.PropertyChange -= HandlePropertyChange;
-                        events.Read -= HandleRead;
                         events.Reply -= HandleReply;
                         events.ReplyAll -= HandleReplyAll;
                         events.Unload -= HandleUnload;
@@ -409,41 +476,52 @@ namespace Acacia.Utils
 
             private void HandleBeforeDelete(object item, ref bool cancel)
             {
+                _debug?.RecordEvent(DebugEvent.BeforeDelete);
                 using (IItem wrapped = item.WrapOrDefault<IItem>(false))
                     _events.OnBeforeDelete(wrapped, ref cancel);
             }
 
             private void HandleForward(object response, ref bool cancel)
             {
+                _debug?.RecordEvent(DebugEvent.Forward);
                 using (IItem wrapped = response.WrapOrDefault<IItem>(false))
                     _events.OnForward(_item as IMailItem, wrapped as IMailItem);
             }
 
             private void HandlePropertyChange(string name)
             {
+                _debug?.RecordEvent(DebugEvent.PropertyChange, name);
                 _events.OnPropertyChange(_item, name);
             }
 
             private void HandleRead()
             {
+                if (_debug != null)
+                {
+                    _debug.RecordEvent(DebugEvent.Read);
+                    _debug.Subject = _item.Subject;
+                }
                 // TODO: should this not be simply an IItem?
                 _events.OnRead(_item as IMailItem);
             }
 
             private void HandleReply(object response, ref bool cancel)
             {
+                _debug?.RecordEvent(DebugEvent.Reply);
                 using (IItem wrapped = response.WrapOrDefault<IItem>(false))
                     _events.OnReply(_item as IMailItem, wrapped as IMailItem);
             }
 
             private void HandleReplyAll(object response, ref bool cancel)
             {
+                _debug?.RecordEvent(DebugEvent.ReplyAll);
                 using (IItem wrapped = response.WrapOrDefault<IItem>(false))
                     _events.OnReplyAll(_item as IMailItem, wrapped as IMailItem);
             }
 
             private void HandleUnload()
             {
+                _debug?.RecordEvent(DebugEvent.Unload);
                 // All events must be unhooked on unload, otherwise a resource leak is created.
                 HookEvents(false);
                 Dispose();
@@ -451,8 +529,75 @@ namespace Acacia.Utils
 
             private void HandleWrite(ref bool cancel)
             {
+                _debug?.RecordEvent(DebugEvent.Write);
                 _events.OnWrite(_item, ref cancel);
             }
+        }
+
+        public interface MailEventDebug
+        {
+            string Id { get; }
+            int ItemId { get; }
+            string Subject { get; }
+            int GetEventCount(DebugEvent which);
+            IEnumerable<DebugEvent> GetEvents();
+            IEnumerable<string> Properties { get; }
+        }
+
+
+        private class MailEventDebugImpl : MailEventDebug
+        { 
+            private readonly ConcurrentDictionary<DebugEvent, int> _eventCounts = new ConcurrentDictionary<DebugEvent, int>();
+            private readonly List<string> _properties = new List<string>();
+
+            public readonly int _id;
+            private readonly int _itemId;
+            public DateTime? GCTime
+            {
+                get;
+                private set;
+            }
+
+            public MailEventDebugImpl(int id, IItem item)
+            {
+                this._id = id;
+                _itemId = item.TraceId;
+            }
+
+            public int GetEventCount(DebugEvent which)
+            {
+                int count;
+                _eventCounts.TryGetValue(which, out count);
+                return count;
+            }
+
+            public void RecordEvent(DebugEvent which, string property = null)
+            {
+                _eventCounts.AddOrUpdate(which, 1, (i, value) => value + 1);
+                if (property != null)
+                    _properties.Add(property);
+                Logger.Instance.TraceExtra(typeof(DisposableTracerFull), "{0}: {1}{2}", _itemId, which, property,
+                    property == null ? "" : (" " + property));
+            }
+
+            public IEnumerable<DebugEvent> GetEvents()
+            {
+                return _eventCounts.Keys;
+            }
+
+            public IEnumerable<string> Properties
+            {
+                get { return _properties; }
+            }
+
+            public void Finished()
+            {
+                GCTime = DateTime.Now;
+            }
+
+            public string Id { get { return _id.ToString(); } }
+            public int ItemId { get { return _itemId; } }
+            public string Subject { get; set; }
         }
 
         #endregion

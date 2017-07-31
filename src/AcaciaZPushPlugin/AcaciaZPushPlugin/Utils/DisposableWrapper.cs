@@ -26,12 +26,31 @@ namespace Acacia.Utils
 {
     abstract public class DisposableWrapper : IDisposable
     {
-        private static Dictionary<Type, int> typeCounts = new Dictionary<Type, int>();
+        private static DisposableTracer tracer = InitTracer();
+
+        private static DisposableTracer InitTracer()
+        {
+            if (GlobalOptions.INSTANCE.WrapperTrace)
+                return new DisposableTracerFull();
+            return new DisposableTracerDummy();
+        }
+
+        public static DisposableTracerFull GetTracer()
+        {
+            return tracer as DisposableTracerFull;
+        }
+
+        private bool _isDisposed;
+        public readonly System.Diagnostics.StackTrace StackTrace;
+        private readonly int _traceId;
+        public int TraceId { get { return _traceId; } }
+        public bool IsDisposed { get { return _isDisposed; } }
 
         protected DisposableWrapper()
         {
             Interlocked.Increment(ref Statistics.CreatedWrappers);
-            this._createdTrace = new System.Diagnostics.StackTrace();
+            this.StackTrace = new System.Diagnostics.StackTrace(1, true);
+            tracer.Created(this, out _traceId);
         }
 
         ~DisposableWrapper()
@@ -39,27 +58,17 @@ namespace Acacia.Utils
             Interlocked.Increment(ref Statistics.DeletedWrappers);
             if (!_isDisposed)
             {
-                Logger.Instance.Warning(this, "Undisposed wrapper: {0}", _createdTrace);
-                // Dispose, but don't count auto disposals, so the stats show it.
+                Logger.Instance.Warning(this, "Undisposed wrapper: {0}", StackTrace);
                 DoRelease();
             }
-            else
-            {
-                --typeCounts[GetType()];
-            }
+            tracer.Deleted(this, _isDisposed);
         }
-
-        private bool _isDisposed;
-        private readonly System.Diagnostics.StackTrace _createdTrace;
 
         virtual public void Dispose()
         {
             if (!_isDisposed)
             {
-                if (!typeCounts.ContainsKey(GetType()))
-                    typeCounts.Add(GetType(), 1);
-                else
-                    ++typeCounts[GetType()];
+                tracer.Disposed(this);
 
                 _isDisposed = true;
                 Interlocked.Increment(ref Statistics.DisposedWrappers);
