@@ -1,3 +1,8 @@
+# Deprecated
+Kopano OL Extension is available at: https://download.kopano.io/community/olextension:/
+You do not have to compile yourself.
+
+
 # Kopano OL Extension
 We live in a world where it is a commodity to work with apps or web interfaces – just have a look at the big amounts of HTML5-apps on your tablets and smartphones. However, there are situations in which a rich application is needed. Think about working offline during a five hour flight or deeper integrations like writing series of letters in your Office suite.
 
